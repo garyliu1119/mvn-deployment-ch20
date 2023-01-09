@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>76ccee40-8526-4d0e-b086-5fe4a54d7e0f</groupId>
+	<groupId>7fdb1b57-615c-4393-8327-f8a042c7fe67</groupId>
 	<artifactId>helloworld-api</artifactId>
 	<version>1.0.0</version>
 	<packaging>mule-application</packaging>
@@ -12,17 +12,24 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
 		<app.runtime>4.4.0</app.runtime>
 		<mule.maven.plugin.version>3.8.2</mule.maven.plugin.version>
 		<munit.version>2.3.13</munit.version>
+		
 		<server>anypoint-exchange</server>
 		<deploy.env>Sandbox</deploy.env>
 		<deploy.target>Cloudhub-US-East-2</deploy.target>
 		<deploy.replicas>1</deploy.replicas>
-		<deploy.vCores>0.2</deploy.vCores>
+		<deploy.vCores>0.1</deploy.vCores>
+		<mule.env>DEV</mule.env>
+		<debug.ssl>ssl:handshake</debug.ssl>
+		<maven.properties>src/main/resources/deployment/ch20.dev.deployment.yaml</maven.properties>
+		
+<!--  
 		<anypoint.platform.clientId>8367ee8fe3474d889f2feaa2b4050e1a</anypoint.platform.clientId>
 		<anypoint.platform.client.secret>526370a2dD114947A336330717a588f4</anypoint.platform.client.secret>
+ -->
+ 
 	</properties>
 
 	<build>
@@ -61,6 +68,26 @@
 					</coverage>
 				</configuration>
 			</plugin>
+
+			<plugin>
+			    <groupId>it.ozimov</groupId>
+			    <artifactId>yaml-properties-maven-plugin</artifactId>
+			    <version>1.1.3</version>
+			    <executions>
+			        <execution>
+			            <phase>initialize</phase>
+			            <goals>
+			                <goal>read-project-properties</goal>
+			            </goals>
+			            <configuration>
+			                <files>
+			                    <file>${maven.properties}</file>
+			                </files>
+			            </configuration>
+			        </execution>
+			    </executions>
+			</plugin>
+						
 			<plugin>
 				<groupId>org.mule.tools.maven</groupId>
 				<artifactId>mule-maven-plugin</artifactId>
@@ -80,11 +107,20 @@
 						<properties>
 							<anypoint.platform.client_id>${anypoint.platform.clientId}</anypoint.platform.client_id>
 							<anypoint.platform.client_secret>${anypoint.platform.client.secret}</anypoint.platform.client_secret>
-							<mule.env>DEV</mule.env>
+							<mule.env>${mule.env}</mule.env>
+							<javax.net.debug>${debug.ssl}</javax.net.debug>
 						</properties>
 						<secureProperties>
 							<myPassword>Mulesoft</myPassword>
 						</secureProperties>
+						<!-- Loggng -->
+						<scopeLoggingConfigurations>
+						  <scopeLoggingConfiguration>
+						    <scope>org.mule.service.http.impl.service.HttpMessageLogger</scope>
+						    <logLevel>DEBUG</logLevel>
+						  </scopeLoggingConfiguration>
+						</scopeLoggingConfigurations>
+												
 						<deploymentSettings>
 							<lastMileSecurity>false</lastMileSecurity>
 							<forwardSslSession>false</forwardSslSession>

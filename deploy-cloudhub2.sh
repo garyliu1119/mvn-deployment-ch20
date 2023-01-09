@@ -1,1 +1,1 @@
-mvn clean deploy -DmuleDeploy -DskipTests
+mvn -X clean deploy -DmuleDeploy -DskipTests
