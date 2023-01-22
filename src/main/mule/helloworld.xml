@@ -3,7 +3,7 @@
     <http:listener-config name="helloworld-httpListenerConfig">
         <http:listener-connection host="0.0.0.0" port="8081" />
     </http:listener-config>
-    <apikit:config name="helloworld-config" api="resource::76ccee40-8526-4d0e-b086-5fe4a54d7e0f:helloworld:1.0.0:raml:zip:helloworld.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
+    <apikit:config name="helloworld-config" api="resource::7fdb1b57-615c-4393-8327-f8a042c7fe67:hellworld-api:1.0.0:raml:zip:helloworld.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
     <http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="14e76ebe-84e8-4b30-8481-e9d1af0b749c" >
 		<http:request-connection host="localhost" port="8081" />
 	</http:request-config>

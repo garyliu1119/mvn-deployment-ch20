@@ -1,3 +1,12 @@
 anypoint.platform:
-  clientId: 8367ee8fe3474d889f2feaa2b4050e1a
-  clientSecret: 526370a2dD114947A336330717a588f4
+  clientId: a0079a01356543a8976be411d5d840dd
+  clientSecret: A41Dc359A1A245B99E3fD09FcA712701
+deploy:
+  env: DEV
+  target: Cloudhub-US-East-2
+  replica: "1"
+  vCores: "0.1"
+mule:
+  env: DEV
+debug:
+  ssl: "ssl:handshake"    
